@@ -13,9 +13,9 @@
 ## 游戏效果
 
 - 将发动机放进 Sable 组装的子层结构中，给发动机红石信号即可产生推力；可使用 Sable 自带的组装工具/命令，不需要航空学。
-- 红石信号强度 **1–15 对应 1/15–15/15 油门**；无信号时没有推力。
-- 油门在 Sable physics tick 上持续计算，推力沿发动机喷口朝向施加；未组装的静态方块不会自行推进。
-- 方块朝向为水平四向。断电时显示停机状态；红石激活时切换为黄芯橙焰。
+- 红石信号强度 **0–15** 对应 **0–100% 推力**；每个非零等级使用对应的火焰尺寸，信号越强，火焰越长、越粗。
+- 推力沿发动机喷口朝向施加；未组装的静态方块不会自行推进。
+- 方块朝向为水平四向。断电时停机、无火焰；红石激活时显示随信号变化的黄芯橙焰。
 - 最大推力当前设为 **8 Sable 推力单位**，可在 `RedstoneEngineBlockEntity.MAX_THRUST` 调整。
 - 合成配方只使用原版铁锭、铜锭、红石和火焰弹。
 
@@ -27,17 +27,18 @@
 ./gradlew build
 ```
 
-成品位于 `build/libs/rocketengine-0.3.0.jar`。整合包需要安装 Minecraft、NeoForge 和 Sable；不需要安装 Create 或 Create: Aeronautics。
+成品位于 `build/libs/rocketengine-0.4.0.jar`。整合包需要安装 Minecraft、NeoForge 和 Sable；不需要安装 Create 或 Create: Aeronautics。
 
 ## 模型
 
 模型源来自仓库原始 `model (2).json`，已转换成 Minecraft Java 方块模型并保留原 `main` / `fire` 的状态效果：
 
-- `src/main/resources/assets/rocketengine/models/block/engine_off.json`
-- `src/main/resources/assets/rocketengine/models/block/engine_on.json`
-- `src/main/resources/assets/rocketengine/textures/block/engine_flame.png`
+- `src/main/resources/assets/rocketengine/models/block/engine_off.json`：红石等级 0。
+- `engine_on_p01.json` 至 `engine_on_p14.json`：红石等级 1–14，火焰几何按等级从小到大缩放。
+- `engine_on.json`：红石等级 15 的完整火焰。
+- 火焰纹理：`src/main/resources/assets/rocketengine/textures/block/engine_flame.png`。
 
-运行时模型由 `assets/rocketengine/blockstates/redstone_engine.json` 按 `powered` 状态切换；Sable physics actor 负责在组装结构上实际施力。
+`assets/rocketengine/blockstates/redstone_engine.json` 按 `power=0..15` 和发动机朝向选择对应模型；同一 `power` 状态也决定 Sable physics actor 的实际油门与推力。
 
 ## 上游参考
 

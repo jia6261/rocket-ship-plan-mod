@@ -1,11 +1,11 @@
-# 发动机状态与红石推力
+# 发动机红石与火焰状态
 
-此模组只要求 Sable，不需要 Create、Create: Aeronautics 或 Simulated。状态和推力由 `rocketengine:redstone_engine` 方块驱动：
+`rocketengine:redstone_engine` 使用 `power=0..15` 保存邻近红石信号等级；该状态同时驱动方块模型和 Sable 推进器，确保视觉与推力一致。
 
-- `powered=false`：采用停止模型 `src/main/resources/assets/rocketengine/models/block/engine_off.json`，无推力。
-- `powered=true`：采用开启模型 `src/main/resources/assets/rocketengine/models/block/engine_on.json`，显示火焰。
-- 红石信号强度 1–15 对应线性油门 1/15–15/15；Sable physics tick 根据油门向喷口方向施加推力。
-- 将方块组装进 Sable 子层结构后即可推进；未组装时红石只切换外观。
-- 合成配方仅使用原版物品。
+- `power=0`：使用 `engine_off.json`，发动机停止、无火焰、推力为零。
+- `power=1..14`：使用 `engine_on_p01.json` 至 `engine_on_p14.json`。火焰沿喷口方向逐级变长、变粗；推力为最大值的 `power / 15`。
+- `power=15`：使用完整火焰模型 `engine_on.json`，推力达到最大值。
+- 每个等级在四种水平朝向上都映射到对应旋转的模型。
+- 只有组装进 Sable 子层结构后才会产生飞行器推力；未组装时红石仍会切换火焰外观。无需 Create、Create: Aeronautics 或 Simulated。
 
-原 Blockbench 导入变体 `engine_off.json` / `engine_on.json` 和 `engine_state_assets.zip` 仍保留在仓库根目录作为模型源文件；游戏中使用 `src/main/resources` 下经转换的模型。
+中间火焰模型由完整模型的火焰几何以喷口为中心同步缩放长度和截面生成；根目录中的 Blockbench 源变体和 `engine_state_assets.zip` 保留为原始模型素材。

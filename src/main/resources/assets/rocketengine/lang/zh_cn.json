@@ -1,5 +1,5 @@
 {
   "block.rocketengine.redstone_engine": "红石火箭发动机",
   "itemGroup.rocketengine.main": "火箭发动机计划",
-  "tooltip.rocketengine.redstone_engine": "红石信号越强，推力越大"
+  "tooltip.rocketengine.redstone_engine": "红石信号越强，推力越大、火焰越大"
 }

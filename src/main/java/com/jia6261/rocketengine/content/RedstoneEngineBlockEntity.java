@@ -5,7 +5,6 @@ import dev.ryanhcode.sable.api.block.propeller.BlockEntityPropeller;
 import dev.ryanhcode.sable.api.block.propeller.BlockEntitySubLevelPropellerActor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -49,10 +48,6 @@ public final class RedstoneEngineBlockEntity extends BlockEntity implements Bloc
     }
 
     private double getThrottle() {
-        Level level = getLevel();
-        if (level == null) {
-            return 0.0;
-        }
-        return level.getBestNeighborSignal(getBlockPos()) / 15.0;
+        return getBlockState().getValue(RedstoneEngineBlock.POWER) / 15.0;
     }
 }
