@@ -42,3 +42,7 @@
 
 - [Create: Aeronautics 官方源码](https://github.com/Creators-of-Aeronautics/Simulated-Project) 与 [Modrinth 兼容信息](https://modrinth.com/project/oWaK0Q19)：确认 1.21.1 / NeoForge 目标。
 - [Sable 推力 actor 接口](https://github.com/ryanhcode/sable/blob/main/common/src/main/java/dev/ryanhcode/sable/api/block/propeller/BlockEntitySubLevelPropellerActor.java)：方块实体通过 physics tick 将 `BlockEntityPropeller` 提供的推力写入 Sable 的 propulsion force group。
+
+## 自动构建与发布
+
+`.github/workflows/release.yml` 会在每次推送到 `main` 时用 Java 21 构建模组，并将 JAR 发布到 GitHub Releases。每个构建使用独立的 `auto-运行编号-提交短 SHA` 标签；若同一次 workflow 重跑，会更新该 release 的 JAR。也可以从 GitHub Actions 页面手动运行。
