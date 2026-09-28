@@ -1,0 +1,5 @@
+{
+  "block.rocketengine.redstone_engine": "Redstone Rocket Engine",
+  "itemGroup.rocketengine.main": "Rocket Engine Plan",
+  "tooltip.rocketengine.redstone_engine": "Stronger redstone signal produces more thrust"
+}
