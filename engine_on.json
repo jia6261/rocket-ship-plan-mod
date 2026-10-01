@@ -6,8 +6,8 @@
     "1": "block/texture2",
     "2": "block/texture3",
     "3": "block/texture4",
-    "4": "block/engine_flame",
-    "5": "block/engine_flame",
+    "4": "block/texture5",
+    "5": "block/texture5",
     "particle": "block/texture1"
   },
   "elements": [

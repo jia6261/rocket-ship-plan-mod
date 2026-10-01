@@ -4,8 +4,8 @@
     "1": "rocketengine:block/texture2",
     "2": "rocketengine:block/texture3",
     "3": "rocketengine:block/texture4",
-    "4": "rocketengine:block/engine_flame",
-    "5": "rocketengine:block/engine_flame",
+    "4": "rocketengine:block/texture5",
+    "5": "rocketengine:block/texture5",
     "particle": "rocketengine:block/texture1"
   },
   "elements": [
