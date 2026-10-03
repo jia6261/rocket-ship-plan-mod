@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 public final class RedstoneEngineBlock extends BaseEntityBlock {
     public static final MapCodec<RedstoneEngineBlock> CODEC = simpleCodec(RedstoneEngineBlock::new);
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final IntegerProperty POWER = IntegerProperty.create("power", 0, 15);
 
     public RedstoneEngineBlock(Properties properties) {
@@ -39,7 +39,7 @@ public final class RedstoneEngineBlock extends BaseEntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockPos pos = context.getClickedPos();
         return defaultBlockState()
-                .setValue(FACING, context.getHorizontalDirection().getOpposite())
+                .setValue(FACING, context.getNearestLookingDirection().getOpposite())
                 .setValue(POWER, context.getLevel().getBestNeighborSignal(pos));
     }
 

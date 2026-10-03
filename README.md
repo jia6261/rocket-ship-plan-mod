@@ -12,11 +12,13 @@ Sable 是本模组唯一需要额外安装的模组；Minecraft 和 NeoForge 为
 
 ## 游戏效果
 
-红石强度 **0–15** 对应 **0–100% 推力**，发动机在 Sable 组装的子层结构中沿喷口朝向产生推力；未组装的静态方块不会自行推进。红石等级同时控制火焰尺寸，断电时停机、无火焰。
+- 发动机可以朝 **上、下、东、西、南、北** 六个方向放置。朝向跟随放置时玩家视线最近的方向的反向；模型喷口与 Sable 推力方向一致。
+- 红石强度 **0–15** 对应 **0–100% 推力**。发动机在 Sable 组装的子层结构中沿喷口朝向产生推力；未组装的静态方块不会自行推进。
+- 红石等级同时控制火焰尺寸：断电时停机、无火焰；信号越强，推力和火焰越大。
 
-已从 [Blockbench 分享模型](https://blckbn.ch/dv54iG)导入新的核心火焰贴图。外围火焰继续使用原始 `texture5.png`，新增的核心火焰材质使用 `texture6.png`（为避免分享文件中两个材质都叫 `texture5` 而另行命名）。原先“所有 UV 下移一格”的改动已撤销，模型 UV 恢复到下移前的位置；贴图像素不做平移。
+本次采用附件里的新版 Blockbench 模型几何，并导入更新的 `texture3.png`；核心火焰继续使用 `texture6.png`，外围火焰使用 `texture5.png`。根目录原有模型与材质文件保持不覆盖；附件源文件快照保存在 `source_assets/blockbench_2026-10-03/`。
 
-满档最大推力现为 **128 Sable 推力单位**，是上一版的 **16 倍**；红石等级仍按 `power / 15` 线性缩放，可在 `RedstoneEngineBlockEntity.MAX_THRUST` 调整。合成配方只使用原版铁锭、铜锭、红石和火焰弹。
+满档最大推力为 **128 Sable 推力单位**，红石等级按 `power / 15` 线性缩放，可在 `RedstoneEngineBlockEntity.MAX_THRUST` 调整。合成配方只使用原版铁锭、铜锭、红石和火焰弹。
 
 ## 构建
 
@@ -26,17 +28,15 @@ Sable 是本模组唯一需要额外安装的模组；Minecraft 和 NeoForge 为
 ./gradlew build
 ```
 
-成品位于 `build/libs/rocketengine-0.4.4.jar`。整合包需要安装 Minecraft、NeoForge 和 Sable。
+成品位于 `build/libs/rocketengine-0.5.0.jar`。整合包需要安装 Minecraft、NeoForge 和 Sable。
 
 ## 模型与材质
 
-- `engine_off.json`：红石等级 0；使用 cutout 渲染。
+- `engine_off.json`：红石等级 0；停机、无火焰，cutout 渲染。
 - `engine_on_p01.json` 至 `engine_on_p14.json`：红石等级 1–14；火焰随推力逐级变大。
-- `engine_on.json`：红石等级 15；使用半透明渲染以保留新核心火焰材质的 alpha。
-- 新增核心火焰材质位于 `src/main/resources/assets/rocketengine/textures/block/texture6.png`；外围火焰使用原始 `texture5.png`。引擎游戏资源里的 `texture1.png`–`texture4.png` 也同步自分享模型。
-- 所有运行时模型的 UV 均恢复为下移前的坐标；原始 `model (2).json` 和根目录的 `texture1.png`–`texture5.png` 未覆盖。
-
-`assets/rocketengine/blockstates/redstone_engine.json` 按 `power=0..15` 和发动机朝向选择对应模型；同一 `power` 状态决定 Sable actor 的实际油门与推力。
+- `engine_on.json`：红石等级 15；满档火焰，translucent 渲染以保留材质透明像素。
+- 每个红石模型另有 `_vertical` 版本，供朝上/朝下的方块状态使用；`redstone_engine.json` 覆盖 6 个朝向与 16 个红石等级，共 96 种状态。
+- 运行时贴图位于 `src/main/resources/assets/rocketengine/textures/block/`；新版 `texture3.png` 来自本次附件，核心火焰是 `texture6.png`，外围火焰是 `texture5.png`。
 
 ## 上游参考
 
