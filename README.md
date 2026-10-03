@@ -16,7 +16,7 @@ Sable 是本模组唯一需要额外安装的模组；Minecraft 和 NeoForge 为
 
 已从 [Blockbench 分享模型](https://blckbn.ch/dv54iG)导入新的核心火焰贴图。外围火焰继续使用原始 `texture5.png`，新增的核心火焰材质使用 `texture6.png`（为避免分享文件中两个材质都叫 `texture5` 而另行命名）。原先“所有 UV 下移一格”的改动已撤销，模型 UV 恢复到下移前的位置；贴图像素不做平移。
 
-最大推力当前设为 **8 Sable 推力单位**，可在 `RedstoneEngineBlockEntity.MAX_THRUST` 调整。合成配方只使用原版铁锭、铜锭、红石和火焰弹。
+满档最大推力现为 **128 Sable 推力单位**，是上一版的 **16 倍**；红石等级仍按 `power / 15` 线性缩放，可在 `RedstoneEngineBlockEntity.MAX_THRUST` 调整。合成配方只使用原版铁锭、铜锭、红石和火焰弹。
 
 ## 构建
 
@@ -26,7 +26,7 @@ Sable 是本模组唯一需要额外安装的模组；Minecraft 和 NeoForge 为
 ./gradlew build
 ```
 
-成品位于 `build/libs/rocketengine-0.4.3.jar`。整合包需要安装 Minecraft、NeoForge 和 Sable。
+成品位于 `build/libs/rocketengine-0.4.4.jar`。整合包需要安装 Minecraft、NeoForge 和 Sable。
 
 ## 模型与材质
 

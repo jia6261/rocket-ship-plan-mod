@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
  * A redstone level of 1..15 produces 1/15..15/15 of maximum thrust.
  */
 public final class RedstoneEngineBlockEntity extends BlockEntity implements BlockEntitySubLevelPropellerActor, BlockEntityPropeller {
-    private static final double MAX_THRUST = 8.0;
+    private static final double MAX_THRUST = 128.0;
     private static final double MAX_AIRFLOW = 16.0;
 
     public RedstoneEngineBlockEntity(BlockPos pos, BlockState state) {
