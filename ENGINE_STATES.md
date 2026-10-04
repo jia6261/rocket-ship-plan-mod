@@ -1,8 +1,8 @@
 # 发动机红石与材质状态
 
-`rocketengine:redstone_engine` 使用 `power=0..15` 保存邻近红石信号等级，并使用六向 `facing` 状态控制模型和 Sable 推力方向。
+`rocketengine:redstone_engine` 使用 `power=0..15` 保存邻近红石信号等级；六向 `facing` 表示模型喷口/废气方向，Sable 推力是其反方向。
 
-- 可朝上、下、东、西、南、北六个方向放置；`facing`、模型喷口和 Sable actor 的方向一致。
+- 可朝上、下、东、西、南、北六个方向放置；`facing` 与模型喷口一致，火箭反作用推力朝 `facing.getOpposite()`。
 - `power=0`：使用 `engine_off.json`，发动机停止、无火焰、推力为零。
 - `power=1..14`：使用 `engine_on_p01.json` 至 `engine_on_p14.json`；火焰尺寸随红石等级增大，推力为最大值的 `power / 15`。
 - `power=15`：使用完整火焰模型 `engine_on.json`，最大推力为 **128 Sable 推力单位**。

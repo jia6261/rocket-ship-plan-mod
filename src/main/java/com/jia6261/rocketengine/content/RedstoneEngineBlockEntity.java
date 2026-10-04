@@ -37,9 +37,9 @@ public final class RedstoneEngineBlockEntity extends BlockEntity implements Bloc
 
     @Override
     public double getThrust() {
-        // Sable's propeller contract points airflow along FACING and negates thrust;
-        // the negative sign makes the rocket push toward the nozzle direction.
-        return -MAX_THRUST * getThrottle();
+        // Sable applies -getThrust along FACING. FACING is the nozzle/exhaust
+        // direction, so positive thrust makes the rocket react in the opposite direction.
+        return MAX_THRUST * getThrottle();
     }
 
     @Override
