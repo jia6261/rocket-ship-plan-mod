@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "rocketengine:block/specific_impulse_detector"
+    },
+    "facing=south": {
+      "model": "rocketengine:block/specific_impulse_detector",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "rocketengine:block/specific_impulse_detector",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "rocketengine:block/specific_impulse_detector",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "rocketengine:block/specific_impulse_detector",
+      "x": 90
+    },
+    "facing=down": {
+      "model": "rocketengine:block/specific_impulse_detector",
+      "x": 270
+    }
+  }
+}

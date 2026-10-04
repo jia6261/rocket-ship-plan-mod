@@ -1,370 +1,738 @@
 {
   "variants": {
-    "facing=east,power=0": {
+    "facing=east,power=0,running=false": {
       "model": "rocketengine:block/engine_off"
     },
-    "facing=east,power=1": {
+    "facing=east,power=0,running=true": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=1,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=1,running=true": {
       "model": "rocketengine:block/engine_on_p01"
     },
-    "facing=east,power=2": {
+    "facing=east,power=2,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=2,running=true": {
       "model": "rocketengine:block/engine_on_p02"
     },
-    "facing=east,power=3": {
+    "facing=east,power=3,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=3,running=true": {
       "model": "rocketengine:block/engine_on_p03"
     },
-    "facing=east,power=4": {
+    "facing=east,power=4,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=4,running=true": {
       "model": "rocketengine:block/engine_on_p04"
     },
-    "facing=east,power=5": {
+    "facing=east,power=5,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=5,running=true": {
       "model": "rocketengine:block/engine_on_p05"
     },
-    "facing=east,power=6": {
+    "facing=east,power=6,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=6,running=true": {
       "model": "rocketengine:block/engine_on_p06"
     },
-    "facing=east,power=7": {
+    "facing=east,power=7,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=7,running=true": {
       "model": "rocketengine:block/engine_on_p07"
     },
-    "facing=east,power=8": {
+    "facing=east,power=8,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=8,running=true": {
       "model": "rocketengine:block/engine_on_p08"
     },
-    "facing=east,power=9": {
+    "facing=east,power=9,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=9,running=true": {
       "model": "rocketengine:block/engine_on_p09"
     },
-    "facing=east,power=10": {
+    "facing=east,power=10,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=10,running=true": {
       "model": "rocketengine:block/engine_on_p10"
     },
-    "facing=east,power=11": {
+    "facing=east,power=11,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=11,running=true": {
       "model": "rocketengine:block/engine_on_p11"
     },
-    "facing=east,power=12": {
+    "facing=east,power=12,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=12,running=true": {
       "model": "rocketengine:block/engine_on_p12"
     },
-    "facing=east,power=13": {
+    "facing=east,power=13,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=13,running=true": {
       "model": "rocketengine:block/engine_on_p13"
     },
-    "facing=east,power=14": {
+    "facing=east,power=14,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=14,running=true": {
       "model": "rocketengine:block/engine_on_p14"
     },
-    "facing=east,power=15": {
+    "facing=east,power=15,running=false": {
+      "model": "rocketengine:block/engine_off"
+    },
+    "facing=east,power=15,running=true": {
       "model": "rocketengine:block/engine_on"
     },
-    "facing=south,power=0": {
+    "facing=south,power=0,running=false": {
       "model": "rocketengine:block/engine_off",
       "y": 90
     },
-    "facing=south,power=1": {
+    "facing=south,power=0,running=true": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=1,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=1,running=true": {
       "model": "rocketengine:block/engine_on_p01",
       "y": 90
     },
-    "facing=south,power=2": {
+    "facing=south,power=2,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=2,running=true": {
       "model": "rocketengine:block/engine_on_p02",
       "y": 90
     },
-    "facing=south,power=3": {
+    "facing=south,power=3,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=3,running=true": {
       "model": "rocketengine:block/engine_on_p03",
       "y": 90
     },
-    "facing=south,power=4": {
+    "facing=south,power=4,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=4,running=true": {
       "model": "rocketengine:block/engine_on_p04",
       "y": 90
     },
-    "facing=south,power=5": {
+    "facing=south,power=5,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=5,running=true": {
       "model": "rocketengine:block/engine_on_p05",
       "y": 90
     },
-    "facing=south,power=6": {
+    "facing=south,power=6,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=6,running=true": {
       "model": "rocketengine:block/engine_on_p06",
       "y": 90
     },
-    "facing=south,power=7": {
+    "facing=south,power=7,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=7,running=true": {
       "model": "rocketengine:block/engine_on_p07",
       "y": 90
     },
-    "facing=south,power=8": {
+    "facing=south,power=8,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=8,running=true": {
       "model": "rocketengine:block/engine_on_p08",
       "y": 90
     },
-    "facing=south,power=9": {
+    "facing=south,power=9,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=9,running=true": {
       "model": "rocketengine:block/engine_on_p09",
       "y": 90
     },
-    "facing=south,power=10": {
+    "facing=south,power=10,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=10,running=true": {
       "model": "rocketengine:block/engine_on_p10",
       "y": 90
     },
-    "facing=south,power=11": {
+    "facing=south,power=11,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=11,running=true": {
       "model": "rocketengine:block/engine_on_p11",
       "y": 90
     },
-    "facing=south,power=12": {
+    "facing=south,power=12,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=12,running=true": {
       "model": "rocketengine:block/engine_on_p12",
       "y": 90
     },
-    "facing=south,power=13": {
+    "facing=south,power=13,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=13,running=true": {
       "model": "rocketengine:block/engine_on_p13",
       "y": 90
     },
-    "facing=south,power=14": {
+    "facing=south,power=14,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=14,running=true": {
       "model": "rocketengine:block/engine_on_p14",
       "y": 90
     },
-    "facing=south,power=15": {
+    "facing=south,power=15,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 90
+    },
+    "facing=south,power=15,running=true": {
       "model": "rocketengine:block/engine_on",
       "y": 90
     },
-    "facing=west,power=0": {
+    "facing=west,power=0,running=false": {
       "model": "rocketengine:block/engine_off",
       "y": 180
     },
-    "facing=west,power=1": {
+    "facing=west,power=0,running=true": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=1,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=1,running=true": {
       "model": "rocketengine:block/engine_on_p01",
       "y": 180
     },
-    "facing=west,power=2": {
+    "facing=west,power=2,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=2,running=true": {
       "model": "rocketengine:block/engine_on_p02",
       "y": 180
     },
-    "facing=west,power=3": {
+    "facing=west,power=3,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=3,running=true": {
       "model": "rocketengine:block/engine_on_p03",
       "y": 180
     },
-    "facing=west,power=4": {
+    "facing=west,power=4,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=4,running=true": {
       "model": "rocketengine:block/engine_on_p04",
       "y": 180
     },
-    "facing=west,power=5": {
+    "facing=west,power=5,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=5,running=true": {
       "model": "rocketengine:block/engine_on_p05",
       "y": 180
     },
-    "facing=west,power=6": {
+    "facing=west,power=6,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=6,running=true": {
       "model": "rocketengine:block/engine_on_p06",
       "y": 180
     },
-    "facing=west,power=7": {
+    "facing=west,power=7,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=7,running=true": {
       "model": "rocketengine:block/engine_on_p07",
       "y": 180
     },
-    "facing=west,power=8": {
+    "facing=west,power=8,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=8,running=true": {
       "model": "rocketengine:block/engine_on_p08",
       "y": 180
     },
-    "facing=west,power=9": {
+    "facing=west,power=9,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=9,running=true": {
       "model": "rocketengine:block/engine_on_p09",
       "y": 180
     },
-    "facing=west,power=10": {
+    "facing=west,power=10,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=10,running=true": {
       "model": "rocketengine:block/engine_on_p10",
       "y": 180
     },
-    "facing=west,power=11": {
+    "facing=west,power=11,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=11,running=true": {
       "model": "rocketengine:block/engine_on_p11",
       "y": 180
     },
-    "facing=west,power=12": {
+    "facing=west,power=12,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=12,running=true": {
       "model": "rocketengine:block/engine_on_p12",
       "y": 180
     },
-    "facing=west,power=13": {
+    "facing=west,power=13,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=13,running=true": {
       "model": "rocketengine:block/engine_on_p13",
       "y": 180
     },
-    "facing=west,power=14": {
+    "facing=west,power=14,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=14,running=true": {
       "model": "rocketengine:block/engine_on_p14",
       "y": 180
     },
-    "facing=west,power=15": {
+    "facing=west,power=15,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 180
+    },
+    "facing=west,power=15,running=true": {
       "model": "rocketengine:block/engine_on",
       "y": 180
     },
-    "facing=north,power=0": {
+    "facing=north,power=0,running=false": {
       "model": "rocketengine:block/engine_off",
       "y": 270
     },
-    "facing=north,power=1": {
+    "facing=north,power=0,running=true": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=1,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=1,running=true": {
       "model": "rocketengine:block/engine_on_p01",
       "y": 270
     },
-    "facing=north,power=2": {
+    "facing=north,power=2,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=2,running=true": {
       "model": "rocketengine:block/engine_on_p02",
       "y": 270
     },
-    "facing=north,power=3": {
+    "facing=north,power=3,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=3,running=true": {
       "model": "rocketengine:block/engine_on_p03",
       "y": 270
     },
-    "facing=north,power=4": {
+    "facing=north,power=4,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=4,running=true": {
       "model": "rocketengine:block/engine_on_p04",
       "y": 270
     },
-    "facing=north,power=5": {
+    "facing=north,power=5,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=5,running=true": {
       "model": "rocketengine:block/engine_on_p05",
       "y": 270
     },
-    "facing=north,power=6": {
+    "facing=north,power=6,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=6,running=true": {
       "model": "rocketengine:block/engine_on_p06",
       "y": 270
     },
-    "facing=north,power=7": {
+    "facing=north,power=7,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=7,running=true": {
       "model": "rocketengine:block/engine_on_p07",
       "y": 270
     },
-    "facing=north,power=8": {
+    "facing=north,power=8,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=8,running=true": {
       "model": "rocketengine:block/engine_on_p08",
       "y": 270
     },
-    "facing=north,power=9": {
+    "facing=north,power=9,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=9,running=true": {
       "model": "rocketengine:block/engine_on_p09",
       "y": 270
     },
-    "facing=north,power=10": {
+    "facing=north,power=10,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=10,running=true": {
       "model": "rocketengine:block/engine_on_p10",
       "y": 270
     },
-    "facing=north,power=11": {
+    "facing=north,power=11,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=11,running=true": {
       "model": "rocketengine:block/engine_on_p11",
       "y": 270
     },
-    "facing=north,power=12": {
+    "facing=north,power=12,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=12,running=true": {
       "model": "rocketengine:block/engine_on_p12",
       "y": 270
     },
-    "facing=north,power=13": {
+    "facing=north,power=13,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=13,running=true": {
       "model": "rocketengine:block/engine_on_p13",
       "y": 270
     },
-    "facing=north,power=14": {
+    "facing=north,power=14,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=14,running=true": {
       "model": "rocketengine:block/engine_on_p14",
       "y": 270
     },
-    "facing=north,power=15": {
+    "facing=north,power=15,running=false": {
+      "model": "rocketengine:block/engine_off",
+      "y": 270
+    },
+    "facing=north,power=15,running=true": {
       "model": "rocketengine:block/engine_on",
       "y": 270
     },
-    "facing=up,power=0": {
+    "facing=up,power=0,running=false": {
       "model": "rocketengine:block/engine_off_vertical",
       "x": 90
     },
-    "facing=up,power=1": {
+    "facing=up,power=0,running=true": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=1,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=1,running=true": {
       "model": "rocketengine:block/engine_on_p01_vertical",
       "x": 90
     },
-    "facing=up,power=2": {
+    "facing=up,power=2,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=2,running=true": {
       "model": "rocketengine:block/engine_on_p02_vertical",
       "x": 90
     },
-    "facing=up,power=3": {
+    "facing=up,power=3,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=3,running=true": {
       "model": "rocketengine:block/engine_on_p03_vertical",
       "x": 90
     },
-    "facing=up,power=4": {
+    "facing=up,power=4,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=4,running=true": {
       "model": "rocketengine:block/engine_on_p04_vertical",
       "x": 90
     },
-    "facing=up,power=5": {
+    "facing=up,power=5,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=5,running=true": {
       "model": "rocketengine:block/engine_on_p05_vertical",
       "x": 90
     },
-    "facing=up,power=6": {
+    "facing=up,power=6,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=6,running=true": {
       "model": "rocketengine:block/engine_on_p06_vertical",
       "x": 90
     },
-    "facing=up,power=7": {
+    "facing=up,power=7,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=7,running=true": {
       "model": "rocketengine:block/engine_on_p07_vertical",
       "x": 90
     },
-    "facing=up,power=8": {
+    "facing=up,power=8,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=8,running=true": {
       "model": "rocketengine:block/engine_on_p08_vertical",
       "x": 90
     },
-    "facing=up,power=9": {
+    "facing=up,power=9,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=9,running=true": {
       "model": "rocketengine:block/engine_on_p09_vertical",
       "x": 90
     },
-    "facing=up,power=10": {
+    "facing=up,power=10,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=10,running=true": {
       "model": "rocketengine:block/engine_on_p10_vertical",
       "x": 90
     },
-    "facing=up,power=11": {
+    "facing=up,power=11,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=11,running=true": {
       "model": "rocketengine:block/engine_on_p11_vertical",
       "x": 90
     },
-    "facing=up,power=12": {
+    "facing=up,power=12,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=12,running=true": {
       "model": "rocketengine:block/engine_on_p12_vertical",
       "x": 90
     },
-    "facing=up,power=13": {
+    "facing=up,power=13,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=13,running=true": {
       "model": "rocketengine:block/engine_on_p13_vertical",
       "x": 90
     },
-    "facing=up,power=14": {
+    "facing=up,power=14,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=14,running=true": {
       "model": "rocketengine:block/engine_on_p14_vertical",
       "x": 90
     },
-    "facing=up,power=15": {
+    "facing=up,power=15,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 90
+    },
+    "facing=up,power=15,running=true": {
       "model": "rocketengine:block/engine_on_vertical",
       "x": 90
     },
-    "facing=down,power=0": {
+    "facing=down,power=0,running=false": {
       "model": "rocketengine:block/engine_off_vertical",
       "x": 270
     },
-    "facing=down,power=1": {
+    "facing=down,power=0,running=true": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=1,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=1,running=true": {
       "model": "rocketengine:block/engine_on_p01_vertical",
       "x": 270
     },
-    "facing=down,power=2": {
+    "facing=down,power=2,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=2,running=true": {
       "model": "rocketengine:block/engine_on_p02_vertical",
       "x": 270
     },
-    "facing=down,power=3": {
+    "facing=down,power=3,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=3,running=true": {
       "model": "rocketengine:block/engine_on_p03_vertical",
       "x": 270
     },
-    "facing=down,power=4": {
+    "facing=down,power=4,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=4,running=true": {
       "model": "rocketengine:block/engine_on_p04_vertical",
       "x": 270
     },
-    "facing=down,power=5": {
+    "facing=down,power=5,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=5,running=true": {
       "model": "rocketengine:block/engine_on_p05_vertical",
       "x": 270
     },
-    "facing=down,power=6": {
+    "facing=down,power=6,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=6,running=true": {
       "model": "rocketengine:block/engine_on_p06_vertical",
       "x": 270
     },
-    "facing=down,power=7": {
+    "facing=down,power=7,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=7,running=true": {
       "model": "rocketengine:block/engine_on_p07_vertical",
       "x": 270
     },
-    "facing=down,power=8": {
+    "facing=down,power=8,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=8,running=true": {
       "model": "rocketengine:block/engine_on_p08_vertical",
       "x": 270
     },
-    "facing=down,power=9": {
+    "facing=down,power=9,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=9,running=true": {
       "model": "rocketengine:block/engine_on_p09_vertical",
       "x": 270
     },
-    "facing=down,power=10": {
+    "facing=down,power=10,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=10,running=true": {
       "model": "rocketengine:block/engine_on_p10_vertical",
       "x": 270
     },
-    "facing=down,power=11": {
+    "facing=down,power=11,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=11,running=true": {
       "model": "rocketengine:block/engine_on_p11_vertical",
       "x": 270
     },
-    "facing=down,power=12": {
+    "facing=down,power=12,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=12,running=true": {
       "model": "rocketengine:block/engine_on_p12_vertical",
       "x": 270
     },
-    "facing=down,power=13": {
+    "facing=down,power=13,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=13,running=true": {
       "model": "rocketengine:block/engine_on_p13_vertical",
       "x": 270
     },
-    "facing=down,power=14": {
+    "facing=down,power=14,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=14,running=true": {
       "model": "rocketengine:block/engine_on_p14_vertical",
       "x": 270
     },
-    "facing=down,power=15": {
+    "facing=down,power=15,running=false": {
+      "model": "rocketengine:block/engine_off_vertical",
+      "x": 270
+    },
+    "facing=down,power=15,running=true": {
       "model": "rocketengine:block/engine_on_vertical",
       "x": 270
     }

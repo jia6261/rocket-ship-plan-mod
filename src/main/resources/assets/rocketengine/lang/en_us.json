@@ -1,5 +1,17 @@
 {
-  "block.rocketengine.redstone_engine": "Redstone Rocket Engine",
+  "block.rocketengine.redstone_engine": "Lava Rocket Engine",
+  "block.rocketengine.rcs_thruster": "RCS Attitude Thruster",
+  "block.rocketengine.specific_impulse_detector": "Specific Impulse Detector",
+  "block.rocketengine.precision_docking_port": "Precision Docking Port",
   "itemGroup.rocketengine.main": "Rocket Engine Plan",
-  "tooltip.rocketengine.redstone_engine": "Stronger redstone means more thrust and a larger flame"
+  "tooltip.rocketengine.redstone_engine": "Redstone controls thrust; fill lava from the rear nozzle-side port or connect a fluid pipe",
+  "tooltip.rocketengine.rcs_thruster": "Stronger redstone produces more attitude-control thrust; no Aeronautics required",
+  "tooltip.rocketengine.specific_impulse_detector": "Reads adjacent engines/RCS; comparator output is normalized to 0–320 seconds",
+  "tooltip.rocketengine.precision_docking_port": "Collision-free opening players can pass through; does not auto-dock ships",
+  "message.rocketengine.isp_detector.none": "Impulse detector: no engine or RCS found within one block.",
+  "message.rocketengine.isp_detector.reading": "Impulse detector | %s | nominal Isp %s s | delivered throttle %s%% | thrust %s / %s Sable",
+  "message.rocketengine.fuel.rear_only": "Insert lava at the fuel port on the rear side, opposite the nozzle.",
+  "message.rocketengine.fuel.full": "Not enough room in the fuel tank; at least 1000 mB is needed for a lava bucket.",
+  "message.rocketengine.fuel.not_enough": "Less than 1000 mB of lava remains; there is not enough for a bucket.",
+  "message.rocketengine.fuel.status": "Lava fuel: %s / %s mB | redstone: %s/15 | engine running: %s"
 }

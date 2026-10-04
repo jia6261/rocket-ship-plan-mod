@@ -1,6 +1,6 @@
 # Rocket Engine Plan — Sable 附属模组
 
-把 Blockbench 发动机模型做成可在 Sable 物理结构上工作的红石火箭发动机。**不需要 Create、Create: Aeronautics 或 Simulated。**
+把 Blockbench 发动机模型做成可在 Sable 物理结构上工作的红石火箭发动机，并加入 RCS、比冲检测器和可穿行对接接口。**模组本身只要求 Sable；Create 是可选项，仅在你要用 Create 流体管道供液时需要安装。**
 
 ## 支持版本与依赖
 
@@ -8,17 +8,36 @@
 - **NeoForge 21.1.247+**
 - **Sable 2.x**
 
-Sable 是本模组唯一需要额外安装的模组；Minecraft 和 NeoForge 为基础运行环境。无需安装航空学。
+## 游戏功能
 
-## 游戏效果
+### 岩浆火箭发动机
 
-- 发动机可以朝 **上、下、东、西、南、北** 六个方向放置。朝向跟随放置时玩家视线最近的方向的反向；模型喷口表示废气喷射方向，火箭推力与喷口/火焰喷射方向相反。
-- 红石强度 **0–15** 对应 **0–100% 推力**。发动机在 Sable 组装的子层结构中沿喷口反方向产生推力；例如要向上飞，喷口/火焰应朝下放置。未组装的静态方块不会自行推进。
-- 红石等级同时控制火焰尺寸：断电时停机、无火焰；信号越强，推力和火焰越大。
+- 支持上、下、东、西、南、北六向放置。`facing`/模型喷口代表废气喷射方向，实际推力朝喷口反方向；要向上飞时，喷口应朝下。
+- 发动机必须有岩浆且收到红石信号才运行。红石强度 **0–15** 控制推力与火焰大小；燃料耗尽会自动停机。
+- 发动机内置 **4000 mB** 岩浆箱，满档每秒消耗 **20 mB**，可持续约 **200 秒**。
+- **手动加注/取出：**手持岩浆桶/空桶，对准发动机喷口后方（与 `facing` 相反）的燃料接口右键。只有从后侧才能操作。
+- **管道供液：**NeoForge `IFluidHandler` 流体能力只在后侧接口开放，Create 流体管道可以直接连接并输入岩浆；无需给本模组添加 Create 硬依赖。
+- 空手右键可查看当前燃料、红石等级和是否运行。未组装进 Sable 子层结构的静态发动机不会自行推进。
 
-本次采用附件里的新版 Blockbench 模型几何，并导入更新的 `texture3.png`；核心火焰继续使用 `texture6.png`，外围火焰使用 `texture5.png`。根目录原有模型与材质文件保持不覆盖；附件源文件快照保存在 `source_assets/blockbench_2026-10-03/`。
+### RCS 姿态控制喷口
 
-满档最大推力为 **128 Sable 推力单位**，红石等级按 `power / 15` 线性缩放，可在 `RedstoneEngineBlockEntity.MAX_THRUST` 调整。合成配方只使用原版铁锭、铜锭、红石和火焰弹。
+- `RCS 姿态控制喷口`可朝六向放置，红石 0–15 线性调节推力，最大为 **16 Sable 推力单位**，低于主发动机，适合布置在飞船边缘进行平移或力矩控制。
+- 每个 RCS 方块可独立接红石信号；需组装进 Sable 子层结构才会产生飞船推力。当前 RCS 不消耗岩浆。
+
+### 比冲检测器
+
+- 把检测器放在主发动机或 RCS **紧邻的一格**，空手右键即可读取标称比冲、有效油门和当前推力输出。
+- 比冲是设计标称值：主发动机 **320 s**，RCS **80 s**。当前游戏未模拟推进剂质量流量，因此该读数**不是从燃料消耗实时推算**。
+- 检测器可驱动比较器：输出按 **0–320 s** 线性归一化至红石 **0–15**；多个相邻推进器取最高比冲。
+
+### 精确对接接口
+
+- 这是一个**无碰撞的空心接口框**，玩家可以从开口穿过；建造时请保持接口另一侧和上方有足够的通行空间。
+- 它不自动吸附或合并两艘 Sable 飞船；当前作用是提供可穿行的对接/舱门开口。
+
+## 配方与物品
+
+新方块都加入“火箭发动机计划”创造模式物品栏，并有原版材料配方和掉落表。发动机、RCS 与对接框共享本模组的像素材质风格；RCS 使用缩小后的发动机模型。
 
 ## 构建
 
@@ -28,22 +47,10 @@ Sable 是本模组唯一需要额外安装的模组；Minecraft 和 NeoForge 为
 ./gradlew build
 ```
 
-成品位于 `build/libs/rocketengine-0.5.1.jar`。整合包需要安装 Minecraft、NeoForge 和 Sable。
-
-## 模型与材质
-
-- `engine_off.json`：红石等级 0；停机、无火焰，cutout 渲染。
-- `engine_on_p01.json` 至 `engine_on_p14.json`：红石等级 1–14；火焰随推力逐级变大。
-- `engine_on.json`：红石等级 15；满档火焰，translucent 渲染以保留材质透明像素。
-- 每个红石模型另有 `_vertical` 版本，供朝上/朝下的方块状态使用；`redstone_engine.json` 覆盖 6 个朝向与 16 个红石等级，共 96 种状态。
-- 运行时贴图位于 `src/main/resources/assets/rocketengine/textures/block/`；新版 `texture3.png` 来自本次附件，核心火焰是 `texture6.png`，外围火焰是 `texture5.png`。
+成品位于 `build/libs/rocketengine-0.6.0.jar`。`.github/workflows/release.yml` 会在每次推送到 `main` 后自动构建并发布 JAR。
 
 ## 上游参考
 
 - [Sable Modrinth 页面](https://modrinth.com/project/T9PomCSv)
-- [Sable NeoForge 依赖声明](https://github.com/ryanhcode/sable/blob/main/neoforge/src/main/resources/META-INF/neoforge.mods.toml)
 - [Sable 推力 actor 接口](https://github.com/ryanhcode/sable/blob/main/common/src/main/java/dev/ryanhcode/sable/api/block/propeller/BlockEntitySubLevelPropellerActor.java)
-
-## 自动构建与发布
-
-`.github/workflows/release.yml` 会在每次推送到 `main` 时用 Java 21 构建模组，并将 JAR 发布到 GitHub Releases。每个构建使用独立的 `auto-运行编号-提交短 SHA` 标签。
+- [NeoForge 流体能力说明](https://docs.neoforged.net/docs/1.21.1/datastorage/capabilities/)

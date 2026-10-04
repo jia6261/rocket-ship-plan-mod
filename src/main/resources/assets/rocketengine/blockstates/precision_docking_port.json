@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "rocketengine:block/precision_docking_port"
+    },
+    "facing=south": {
+      "model": "rocketengine:block/precision_docking_port",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "rocketengine:block/precision_docking_port",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "rocketengine:block/precision_docking_port",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "rocketengine:block/precision_docking_port",
+      "x": 90
+    },
+    "facing=down": {
+      "model": "rocketengine:block/precision_docking_port",
+      "x": 270
+    }
+  }
+}

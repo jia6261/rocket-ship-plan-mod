@@ -1,5 +1,17 @@
 {
-  "block.rocketengine.redstone_engine": "红石火箭发动机",
+  "block.rocketengine.redstone_engine": "岩浆火箭发动机",
+  "block.rocketengine.rcs_thruster": "RCS 姿态控制喷口",
+  "block.rocketengine.specific_impulse_detector": "比冲检测器",
+  "block.rocketengine.precision_docking_port": "精确对接接口",
   "itemGroup.rocketengine.main": "火箭发动机计划",
-  "tooltip.rocketengine.redstone_engine": "红石信号越强，推力越大、火焰越大"
+  "tooltip.rocketengine.redstone_engine": "红石调节推力；从喷口后方加注岩浆或接入流体管道",
+  "tooltip.rocketengine.rcs_thruster": "红石信号越强，姿态控制推力越大；无需航空学",
+  "tooltip.rocketengine.specific_impulse_detector": "检测相邻发动机/RCS；比较器输出按 0–320 秒比冲归一化",
+  "tooltip.rocketengine.precision_docking_port": "无碰撞开口，可供玩家穿行；不自动吸附飞船",
+  "message.rocketengine.isp_detector.none": "比冲检测器：相邻一格内未发现发动机或 RCS。",
+  "message.rocketengine.isp_detector.reading": "比冲检测器 | %s | 标称比冲 %s s | 实际油门 %s%% | 推力 %s / %s Sable",
+  "message.rocketengine.fuel.rear_only": "请从喷口后方的燃料接口加注岩浆。",
+  "message.rocketengine.fuel.full": "燃料箱空间不足；需要至少 1000 mB 空间才能倒入一桶岩浆。",
+  "message.rocketengine.fuel.not_enough": "燃料箱里不足 1000 mB 岩浆，无法取出一桶。",
+  "message.rocketengine.fuel.status": "岩浆燃料：%s / %s mB | 红石：%s/15 | 发动机运行：%s"
 }
