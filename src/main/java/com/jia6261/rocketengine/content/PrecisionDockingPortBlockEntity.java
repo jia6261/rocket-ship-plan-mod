@@ -20,22 +20,34 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Quaterniond;
 import org.joml.Vector3d;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /** Server-side search, capture, attraction, and Sable fixed-joint lifecycle for a docking port. */
 public final class PrecisionDockingPortBlockEntity extends BlockEntity {
     private static final double SEARCH_RANGE = 8.0;
     private static final double APPROACH_DOT_MIN = 0.15;
     private static final double LOCK_ANCHOR_DISTANCE = 0.10;
     private static final double LOCK_FACING_COS = Math.cos(Math.toRadians(8.0));
-    private static final double MAX_LINEAR_IMPULSE = 0.08;
-    private static final double LINEAR_IMPULSE_GAIN = 0.012;
-    private static final double MAX_ANGULAR_IMPULSE = 0.04;
-    private static final double ANGULAR_IMPULSE_GAIN = 0.018;
+    private static final double MAX_DOCKING_RCS_THROTTLE = 0.16;
+    private static final double LINEAR_POSITION_GAIN = 0.035;
+    private static final double LINEAR_VELOCITY_DAMPING = 0.25;
+    private static final double ANGULAR_POSITION_GAIN = 0.12;
+    private static final double ANGULAR_VELOCITY_DAMPING = 0.25;
+    private static final double MIN_THRUSTER_ALIGNMENT_DOT = 0.45;
     private static final int SEARCH_INTERVAL_TICKS = 5;
+    private static final int RCS_SCAN_INTERVAL_TICKS = 20;
 
     private int searchCooldown;
     @Nullable private PrecisionDockingPortBlockEntity captureTarget;
     @Nullable private PrecisionDockingPortBlockEntity lockedPartner;
     @Nullable private FixedConstraintHandle fixedConstraint;
+    @Nullable private ServerSubLevel cachedShipA;
+    @Nullable private ServerSubLevel cachedShipB;
+    private List<RcsThrusterBlockEntity> thrustersA = List.of();
+    private List<RcsThrusterBlockEntity> thrustersB = List.of();
+    private final List<RcsThrusterBlockEntity> assistedThrusters = new ArrayList<>();
+    private int rcsScanCooldown;
 
     public PrecisionDockingPortBlockEntity(BlockPos pos, BlockState state) {
         super(ModContent.PRECISION_DOCKING_PORT_ENTITY.get(), pos, state);
@@ -111,7 +123,7 @@ public final class PrecisionDockingPortBlockEntity extends BlockEntity {
         if (isAligned(own, other)) {
             createFixedJoint(target, ownShip, otherShip, own, other);
         } else {
-            applyAttraction(target, ownShip, otherShip, own, other);
+            applyRcsAlignment(ownShip, otherShip, own, other);
         }
     }
 
@@ -196,9 +208,11 @@ public final class PrecisionDockingPortBlockEntity extends BlockEntity {
 
     private void releaseCapturePair() {
         PrecisionDockingPortBlockEntity old = captureTarget;
+        clearRcsAssist();
         captureTarget = null;
         if (old != null && old.captureTarget == this) {
             old.captureTarget = null;
+            old.clearRcsAssist();
             old.setStatus(old.isPowered()
                     ? PrecisionDockingPortBlock.Status.ARMED
                     : PrecisionDockingPortBlock.Status.IDLE);
@@ -244,43 +258,130 @@ public final class PrecisionDockingPortBlockEntity extends BlockEntity {
                 && a.normalWorld.dot(b.normalWorld) <= -LOCK_FACING_COS;
     }
 
-    private void applyAttraction(PrecisionDockingPortBlockEntity target,
-                                 ServerSubLevel ownShip,
-                                 ServerSubLevel otherShip,
-                                 DockingGeometry own,
-                                 DockingGeometry other) {
+    private void applyRcsAlignment(ServerSubLevel ownShip,
+                                   ServerSubLevel otherShip,
+                                   DockingGeometry own,
+                                   DockingGeometry other) {
+        refreshRcsCache(ownShip, otherShip);
+
         Vector3d separation = new Vector3d(other.anchorWorld).sub(own.anchorWorld);
         double distance = separation.length();
         if (distance < 1.0E-5) return;
-
-        double impulseMagnitude = Math.min(MAX_LINEAR_IMPULSE, distance * LINEAR_IMPULSE_GAIN);
-        Vector3d impulseWorld = separation.mul(impulseMagnitude / distance);
-        Vector3d ownImpulseLocal = ownShip.logicalPose().orientation()
-                .transformInverse(impulseWorld, new Vector3d());
-        Vector3d otherImpulseLocal = otherShip.logicalPose().orientation()
-                .transformInverse(new Vector3d(impulseWorld).negate(), new Vector3d());
+        Vector3d towardOther = separation.div(distance);
 
         RigidBodyHandle ownHandle = RigidBodyHandle.of(ownShip);
         RigidBodyHandle otherHandle = RigidBodyHandle.of(otherShip);
-        if (ownHandle != null && otherHandle != null && ownHandle.isValid() && otherHandle.isValid()) {
-            ownHandle.applyImpulseAtPoint(own.anchorLocal, ownImpulseLocal);
-            otherHandle.applyImpulseAtPoint(other.anchorLocal, otherImpulseLocal);
+        Vector3d ownVelocity = ownHandle == null ? new Vector3d() : ownHandle.getLinearVelocity(new Vector3d());
+        Vector3d otherVelocity = otherHandle == null ? new Vector3d() : otherHandle.getLinearVelocity(new Vector3d());
+        double closingVelocity = new Vector3d(ownVelocity).sub(otherVelocity).dot(towardOther);
+        double translationDemand = clamp(distance * LINEAR_POSITION_GAIN - closingVelocity * LINEAR_VELOCITY_DAMPING,
+                -MAX_DOCKING_RCS_THROTTLE, MAX_DOCKING_RCS_THROTTLE);
+        Vector3d translationIntentA = new Vector3d(towardOther).mul(Math.signum(translationDemand));
+        Vector3d translationIntentB = new Vector3d(translationIntentA).negate();
 
-            Vector3d ownTurn = new Vector3d(own.normalWorld)
-                    .cross(new Vector3d(other.normalWorld).negate());
-            Vector3d otherTurn = new Vector3d(other.normalWorld)
-                    .cross(new Vector3d(own.normalWorld).negate());
-            applyAngularAlignmentImpulse(ownHandle, ownShip, ownTurn);
-            applyAngularAlignmentImpulse(otherHandle, otherShip, otherTurn);
+        Vector3d desiredNormalA = new Vector3d(other.normalWorld).negate();
+        Vector3d rotationAxisA = new Vector3d(own.normalWorld).cross(desiredNormalA);
+        double cosine = clamp(own.normalWorld.dot(desiredNormalA), -1.0, 1.0);
+        double angle = Math.acos(cosine);
+        if (rotationAxisA.lengthSquared() > 1.0E-8) rotationAxisA.normalize();
+        Vector3d ownAngularVelocity = ownHandle == null ? new Vector3d() : ownHandle.getAngularVelocity(new Vector3d());
+        Vector3d otherAngularVelocity = otherHandle == null ? new Vector3d() : otherHandle.getAngularVelocity(new Vector3d());
+        double relativeAngularSpeed = new Vector3d(ownAngularVelocity).sub(otherAngularVelocity).dot(rotationAxisA);
+        double rotationDemand = clamp(angle * ANGULAR_POSITION_GAIN - relativeAngularSpeed * ANGULAR_VELOCITY_DAMPING,
+                -MAX_DOCKING_RCS_THROTTLE, MAX_DOCKING_RCS_THROTTLE);
+        Vector3d rotationIntentA = new Vector3d(rotationAxisA).mul(Math.signum(rotationDemand));
+        Vector3d rotationIntentB = new Vector3d(rotationIntentA).negate();
+
+        commandRcs(ownShip, thrustersA, translationIntentA, Math.abs(translationDemand), rotationIntentA,
+                Math.abs(rotationDemand));
+        commandRcs(otherShip, thrustersB, translationIntentB, Math.abs(translationDemand), rotationIntentB,
+                Math.abs(rotationDemand));
+    }
+
+    private void refreshRcsCache(ServerSubLevel shipA, ServerSubLevel shipB) {
+        if (cachedShipA == shipA && cachedShipB == shipB && rcsScanCooldown-- > 0) return;
+        clearRcsAssist();
+        cachedShipA = shipA;
+        cachedShipB = shipB;
+        thrustersA = findRcsThrusters(shipA);
+        thrustersB = findRcsThrusters(shipB);
+        assistedThrusters.addAll(thrustersA);
+        assistedThrusters.addAll(thrustersB);
+        rcsScanCooldown = RCS_SCAN_INTERVAL_TICKS;
+    }
+
+    private static List<RcsThrusterBlockEntity> findRcsThrusters(ServerSubLevel ship) {
+        List<RcsThrusterBlockEntity> thrusters = new ArrayList<>();
+        for (PlotChunkHolder holder : ship.getPlot().getLoadedChunks()) {
+            for (BlockEntity blockEntity : holder.getChunk().getBlockEntities().values()) {
+                if (blockEntity instanceof RcsThrusterBlockEntity thruster && !thruster.isRemoved()) {
+                    thrusters.add(thruster);
+                }
+            }
+        }
+        return thrusters;
+    }
+
+    private void commandRcs(ServerSubLevel ship,
+                            List<RcsThrusterBlockEntity> thrusters,
+                            Vector3d translationIntent,
+                            double translationThrottle,
+                            Vector3d rotationIntent,
+                            double rotationThrottle) {
+        RcsThrusterBlockEntity bestTranslation = null;
+        RcsThrusterBlockEntity bestRotation = null;
+        double bestTranslationDot = MIN_THRUSTER_ALIGNMENT_DOT;
+        double bestRotationDot = MIN_THRUSTER_ALIGNMENT_DOT;
+        Vector3d pivotWorld = ship.logicalPose().transformPosition(ship.logicalPose().rotationPoint(), new Vector3d());
+
+        for (RcsThrusterBlockEntity thruster : thrusters) {
+            Direction facing = thruster.getBlockState().getValue(RcsThrusterBlock.FACING);
+            Vector3d localFacing = new Vector3d(facing.getStepX(), facing.getStepY(), facing.getStepZ());
+            Vector3d thrustDirection = ship.logicalPose().transformNormal(localFacing, new Vector3d()).negate().normalize();
+
+            double translationDot = translationThrottle > 1.0E-5 ? thrustDirection.dot(translationIntent) : 0.0;
+            if (translationDot > bestTranslationDot) {
+                bestTranslationDot = translationDot;
+                bestTranslation = thruster;
+            }
+
+            if (rotationThrottle > 1.0E-5 && rotationIntent.lengthSquared() > 1.0E-8) {
+                BlockPos pos = thruster.getBlockPos();
+                Vector3d localCenter = new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+                Vector3d thrusterWorld = ship.logicalPose().transformPosition(localCenter, new Vector3d());
+                Vector3d torqueDirection = thrusterWorld.sub(pivotWorld).cross(thrustDirection);
+                if (torqueDirection.lengthSquared() > 1.0E-8) {
+                    double rotationDot = torqueDirection.normalize().dot(rotationIntent);
+                    if (rotationDot > bestRotationDot) {
+                        bestRotationDot = rotationDot;
+                        bestRotation = thruster;
+                    }
+                }
+            }
+        }
+
+        for (RcsThrusterBlockEntity thruster : thrusters) {
+            double command = 0.0;
+            if (thruster == bestTranslation) command = Math.max(command, translationThrottle * bestTranslationDot);
+            if (thruster == bestRotation) command = Math.max(command, rotationThrottle * bestRotationDot);
+            thruster.setDockingAssistThrottle(this, Math.min(MAX_DOCKING_RCS_THROTTLE, command));
         }
     }
 
-    private static void applyAngularAlignmentImpulse(RigidBodyHandle handle, ServerSubLevel ship, Vector3d errorAxis) {
-        double error = errorAxis.length();
-        if (error < 1.0E-5) return;
-        errorAxis.mul(Math.min(MAX_ANGULAR_IMPULSE, error * ANGULAR_IMPULSE_GAIN) / error);
-        Vector3d localTorque = ship.logicalPose().orientation().transformInverse(errorAxis, new Vector3d());
-        handle.applyAngularImpulse(localTorque);
+    private void clearRcsAssist() {
+        for (RcsThrusterBlockEntity thruster : assistedThrusters) {
+            thruster.setDockingAssistThrottle(this, 0.0);
+        }
+        assistedThrusters.clear();
+        thrustersA = List.of();
+        thrustersB = List.of();
+        cachedShipA = null;
+        cachedShipB = null;
+        rcsScanCooldown = 0;
+    }
+
+    private static double clamp(double value, double min, double max) {
+        return Math.max(min, Math.min(max, value));
     }
 
     private void createFixedJoint(PrecisionDockingPortBlockEntity target,
@@ -301,6 +402,7 @@ public final class PrecisionDockingPortBlockEntity extends BlockEntity {
                 new FixedConstraintConfiguration(own.anchorLocal, other.anchorLocal, relativeOrientation));
         if (joint == null || !joint.isValid()) return;
 
+        clearRcsAssist();
         captureTarget = null;
         target.captureTarget = null;
         lockedPartner = target;

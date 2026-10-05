@@ -43,7 +43,16 @@ public final class ModContent {
     public static final DeferredBlock<RcsThrusterBlock> RCS_THRUSTER = BLOCKS.register("rcs_thruster", () ->
             new RcsThrusterBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).strength(2.5F)));
     public static final DeferredItem<BlockItem> RCS_THRUSTER_ITEM = ITEMS.register("rcs_thruster", () ->
-            new BlockItem(RCS_THRUSTER.get(), new Item.Properties()));
+            new BlockItem(RCS_THRUSTER.get(), new Item.Properties()) {
+                @Override
+                public void appendHoverText(net.minecraft.world.item.ItemStack stack,
+                                            Item.TooltipContext context,
+                                            java.util.List<Component> tooltipComponents,
+                                            net.minecraft.world.item.TooltipFlag tooltipFlag) {
+                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+                    tooltipComponents.add(Component.translatable("tooltip.rocketengine.rcs_thruster"));
+                }
+            });
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RcsThrusterBlockEntity>> RCS_THRUSTER_ENTITY =
             BLOCK_ENTITIES.register("rcs_thruster", () ->
                     BlockEntityType.Builder.of(RcsThrusterBlockEntity::new, RCS_THRUSTER.get()).build(null));
