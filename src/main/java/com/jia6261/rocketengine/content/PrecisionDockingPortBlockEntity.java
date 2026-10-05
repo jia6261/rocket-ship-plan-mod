@@ -29,6 +29,8 @@ public final class PrecisionDockingPortBlockEntity extends BlockEntity {
     private static final double APPROACH_DOT_MIN = 0.15;
     private static final double LOCK_ANCHOR_DISTANCE = 0.10;
     private static final double LOCK_FACING_COS = Math.cos(Math.toRadians(8.0));
+    private static final double MAX_MAGNETIC_IMPULSE = 0.08;
+    private static final double MAGNETIC_IMPULSE_GAIN = 0.012;
     private static final double MAX_DOCKING_RCS_THROTTLE = 0.16;
     private static final double LINEAR_POSITION_GAIN = 0.035;
     private static final double LINEAR_VELOCITY_DAMPING = 0.25;
@@ -271,6 +273,7 @@ public final class PrecisionDockingPortBlockEntity extends BlockEntity {
 
         RigidBodyHandle ownHandle = RigidBodyHandle.of(ownShip);
         RigidBodyHandle otherHandle = RigidBodyHandle.of(otherShip);
+        applyMagneticAttraction(ownShip, otherShip, own, other, towardOther, distance, ownHandle, otherHandle);
         Vector3d ownVelocity = ownHandle == null ? new Vector3d() : ownHandle.getLinearVelocity(new Vector3d());
         Vector3d otherVelocity = otherHandle == null ? new Vector3d() : otherHandle.getLinearVelocity(new Vector3d());
         double closingVelocity = new Vector3d(ownVelocity).sub(otherVelocity).dot(towardOther);
@@ -296,6 +299,24 @@ public final class PrecisionDockingPortBlockEntity extends BlockEntity {
                 Math.abs(rotationDemand));
         commandRcs(otherShip, thrustersB, translationIntentB, Math.abs(translationDemand), rotationIntentB,
                 Math.abs(rotationDemand));
+    }
+
+    private static void applyMagneticAttraction(ServerSubLevel ownShip,
+                                                ServerSubLevel otherShip,
+                                                DockingGeometry own,
+                                                DockingGeometry other,
+                                                Vector3d towardOther,
+                                                double distance,
+                                                @Nullable RigidBodyHandle ownHandle,
+                                                @Nullable RigidBodyHandle otherHandle) {
+        if (ownHandle == null || otherHandle == null || !ownHandle.isValid() || !otherHandle.isValid()) return;
+        double magnitude = Math.min(MAX_MAGNETIC_IMPULSE, distance * MAGNETIC_IMPULSE_GAIN);
+        Vector3d impulseWorld = new Vector3d(towardOther).mul(magnitude);
+        Vector3d ownImpulseLocal = ownShip.logicalPose().orientation().transformInverse(impulseWorld, new Vector3d());
+        Vector3d otherImpulseLocal = otherShip.logicalPose().orientation()
+                .transformInverse(new Vector3d(impulseWorld).negate(), new Vector3d());
+        ownHandle.applyImpulseAtPoint(own.anchorLocal, ownImpulseLocal);
+        otherHandle.applyImpulseAtPoint(other.anchorLocal, otherImpulseLocal);
     }
 
     private void refreshRcsCache(ServerSubLevel shipA, ServerSubLevel shipB) {
