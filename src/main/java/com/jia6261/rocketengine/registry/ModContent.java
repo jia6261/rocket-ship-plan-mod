@@ -2,6 +2,7 @@ package com.jia6261.rocketengine.registry;
 
 import com.jia6261.rocketengine.RocketEngineAddon;
 import com.jia6261.rocketengine.content.PrecisionDockingPortBlock;
+import com.jia6261.rocketengine.content.PrecisionDockingPortBlockEntity;
 import com.jia6261.rocketengine.content.RcsThrusterBlock;
 import com.jia6261.rocketengine.content.RcsThrusterBlockEntity;
 import com.jia6261.rocketengine.content.RedstoneEngineBlock;
@@ -55,7 +56,19 @@ public final class ModContent {
     public static final DeferredBlock<PrecisionDockingPortBlock> PRECISION_DOCKING_PORT = BLOCKS.register("precision_docking_port", () ->
             new PrecisionDockingPortBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).strength(3.0F).noOcclusion()));
     public static final DeferredItem<BlockItem> PRECISION_DOCKING_PORT_ITEM = ITEMS.register("precision_docking_port", () ->
-            new BlockItem(PRECISION_DOCKING_PORT.get(), new Item.Properties()));
+            new BlockItem(PRECISION_DOCKING_PORT.get(), new Item.Properties()) {
+                @Override
+                public void appendHoverText(net.minecraft.world.item.ItemStack stack,
+                                            Item.TooltipContext context,
+                                            java.util.List<Component> tooltipComponents,
+                                            net.minecraft.world.item.TooltipFlag tooltipFlag) {
+                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+                    tooltipComponents.add(Component.translatable("tooltip.rocketengine.precision_docking_port"));
+                }
+            });
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PrecisionDockingPortBlockEntity>> PRECISION_DOCKING_PORT_ENTITY =
+            BLOCK_ENTITIES.register("precision_docking_port", () ->
+                    BlockEntityType.Builder.of(PrecisionDockingPortBlockEntity::new, PRECISION_DOCKING_PORT.get()).build(null));
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB = TABS.register("main", () ->
             CreativeModeTab.builder()

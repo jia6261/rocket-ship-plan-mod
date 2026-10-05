@@ -42,11 +42,19 @@ repositories {
         url = 'https://api.modrinth.com/maven'
         content { includeGroup 'maven.modrinth' }
     }
+    exclusiveContent {
+        forRepository {
+            maven { name = 'Sable Companion Maven'; url = 'https://maven.ryanhcode.dev/releases' }
+        }
+        filter { includeGroup 'dev.ryanhcode.sable-companion' }
+    }
 }
 
 dependencies {
     compileOnly "maven.modrinth:sable:${sable_modrinth_version}"
     runtimeOnly "maven.modrinth:sable:${sable_modrinth_version}"
+    // Sable 2.0.5 bundles Companion 1.6.0; compile against its public transform APIs without adding a runtime dependency.
+    compileOnly "dev.ryanhcode.sable-companion:sable-companion-common-1.21.1:${sable_companion_version}"
 }
 
 tasks.named('processResources', ProcessResources).configure {

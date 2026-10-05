@@ -21,4 +21,7 @@
 ## 检测器与对接接口
 
 - `rocketengine:specific_impulse_detector` 检测紧邻一格内的发动机/RCS；空手右键在聊天栏输出标称比冲、有效油门与当前推力。比较器输出按 0–320 s 归一化到 0–15，多个相邻推进器取最大比冲。
-- `rocketengine:precision_docking_port` 有朝向模型但碰撞形状为空，玩家可从开口穿过。它是可穿行的对接框，不执行飞船自动吸附或合并。
+- `rocketengine:precision_docking_port` 有 `facing` 与 `status=idle|armed|capturing|locked` 方块状态；红石信号启动自动对接，必须在两艘飞船的接口上都接通红石。
+- 两端在 8 格内且端面朝向彼此时，接口以 Sable 刚体冲量缓慢牵引平移并辅助校正朝向；锚点相距不超过 0.1 格且法线误差不超过 8° 后，由 Sable `FixedConstraintHandle` 创建固定关节。
+- 断开任一端红石会移除固定关节/取消吸附。固定关节运行时动态创建；加载或重启后接口会重新搜寻，并在仍对齐时重建。
+- 碰撞形状始终为空；视觉状态灯只改变模型，玩家在吸附或锁定时均可从空心中心穿行。接口支持六个 `facing` 方向，不会合并两艘船的子层。

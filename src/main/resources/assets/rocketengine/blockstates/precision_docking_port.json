@@ -1,26 +1,95 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,status=idle": {
       "model": "rocketengine:block/precision_docking_port"
     },
-    "facing=south": {
+    "facing=east,status=armed": {
+      "model": "rocketengine:block/precision_docking_port_armed"
+    },
+    "facing=east,status=capturing": {
+      "model": "rocketengine:block/precision_docking_port_capturing"
+    },
+    "facing=east,status=locked": {
+      "model": "rocketengine:block/precision_docking_port_locked"
+    },
+    "facing=south,status=idle": {
       "model": "rocketengine:block/precision_docking_port",
       "y": 90
     },
-    "facing=west": {
+    "facing=south,status=armed": {
+      "model": "rocketengine:block/precision_docking_port_armed",
+      "y": 90
+    },
+    "facing=south,status=capturing": {
+      "model": "rocketengine:block/precision_docking_port_capturing",
+      "y": 90
+    },
+    "facing=south,status=locked": {
+      "model": "rocketengine:block/precision_docking_port_locked",
+      "y": 90
+    },
+    "facing=west,status=idle": {
       "model": "rocketengine:block/precision_docking_port",
       "y": 180
     },
-    "facing=north": {
+    "facing=west,status=armed": {
+      "model": "rocketengine:block/precision_docking_port_armed",
+      "y": 180
+    },
+    "facing=west,status=capturing": {
+      "model": "rocketengine:block/precision_docking_port_capturing",
+      "y": 180
+    },
+    "facing=west,status=locked": {
+      "model": "rocketengine:block/precision_docking_port_locked",
+      "y": 180
+    },
+    "facing=north,status=idle": {
       "model": "rocketengine:block/precision_docking_port",
       "y": 270
     },
-    "facing=up": {
+    "facing=north,status=armed": {
+      "model": "rocketengine:block/precision_docking_port_armed",
+      "y": 270
+    },
+    "facing=north,status=capturing": {
+      "model": "rocketengine:block/precision_docking_port_capturing",
+      "y": 270
+    },
+    "facing=north,status=locked": {
+      "model": "rocketengine:block/precision_docking_port_locked",
+      "y": 270
+    },
+    "facing=up,status=idle": {
       "model": "rocketengine:block/precision_docking_port",
       "x": 90
     },
-    "facing=down": {
+    "facing=up,status=armed": {
+      "model": "rocketengine:block/precision_docking_port_armed",
+      "x": 90
+    },
+    "facing=up,status=capturing": {
+      "model": "rocketengine:block/precision_docking_port_capturing",
+      "x": 90
+    },
+    "facing=up,status=locked": {
+      "model": "rocketengine:block/precision_docking_port_locked",
+      "x": 90
+    },
+    "facing=down,status=idle": {
       "model": "rocketengine:block/precision_docking_port",
+      "x": 270
+    },
+    "facing=down,status=armed": {
+      "model": "rocketengine:block/precision_docking_port_armed",
+      "x": 270
+    },
+    "facing=down,status=capturing": {
+      "model": "rocketengine:block/precision_docking_port_capturing",
+      "x": 270
+    },
+    "facing=down,status=locked": {
+      "model": "rocketengine:block/precision_docking_port_locked",
       "x": 270
     }
   }
