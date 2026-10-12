@@ -17,5 +17,11 @@
   "message.rocketengine.fuel.rear_only": "请从喷口后方的燃料接口加注岩浆。",
   "message.rocketengine.fuel.full": "燃料箱空间不足；需要至少 1000 mB 空间才能倒入一桶岩浆。",
   "message.rocketengine.fuel.not_enough": "燃料箱里不足 1000 mB 岩浆，无法取出一桶。",
-  "message.rocketengine.fuel.status": "岩浆燃料：%s / %s mB | 红石：%s/15 | 发动机运行：%s"
+  "message.rocketengine.fuel.status": "岩浆燃料：%s / %s mB | 红石：%s/15 | 发动机运行：%s",
+  "message.rocketengine.space.enter.ship": "整艘飞船及 %s 个连接子层已迁移至太空维度。向下飞到 Y < 0 即可返回。",
+  "message.rocketengine.space.return.ship": "整艘飞船及 %s 个连接子层已迁回主世界。",
+  "message.rocketengine.space.ship_required": "跨界需要驾驶 Sable 飞船；为避免人员与飞船分离，本次未传送。",
+  "message.rocketengine.space.dimension_unavailable": "目标维度尚未加载，传送已取消。请检查太空维度资源是否正确加载。",
+  "message.rocketengine.space.dimensional_sable_missing": "无法跨维度迁移飞船：服务端需要安装 Dimensional Sable 1.0.5 或更高版本。",
+  "message.rocketengine.space.warp_failed": "整船跨维度迁移失败；为避免驾驶员与飞船分离，没有单独传送玩家。请检查服务器日志。"
 }

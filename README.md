@@ -1,12 +1,14 @@
 # Rocket Engine Plan — Sable 附属模组
 
-把 Blockbench 发动机模型做成可在 Sable 物理结构上工作的红石火箭发动机，并加入 RCS、比冲检测器和可穿行对接接口。**模组本身只要求 Sable；Create 是可选项，仅在你要用 Create 流体管道供液时需要安装。**
+把 Blockbench 发动机模型做成可在 Sable 物理结构上工作的红石火箭发动机，并加入 RCS、比冲检测器、可穿行对接接口和太空维度。模组需要 **Sable**；跨维度整船迁移还要求服务端安装 **Dimensional Sable 1.0.5+**。Create 是可选项，仅在使用 Create 流体管道供液时需要安装。
 
 ## 支持版本与依赖
 
 - Minecraft Java Edition **1.21.1**
 - **NeoForge 21.1.247+**
 - **Sable 2.x**
+- **Dimensional Sable 1.0.5+**（服务端必需；单人游戏的整合服务端也需要安装）
+- Create 可选，只用于 Create 流体管道供液
 
 ## 游戏功能
 
@@ -35,8 +37,16 @@
 - 两艘 Sable 飞船上的接口都接通红石后进入 **已启动** 状态；接口需安装在 Sable 子层飞船上。
 - 两端面朝彼此且进入 **8 格搜寻范围** 后，接口的弱吸引冲量会拉近两船，同时调用船载 **RCS 喷口**按相对位置/速度自动校正平移和姿态；需布置方向合适的 RCS。端面相对、姿态误差小于约 **8°** 且前缘锚点距离小于 **0.1 格** 时创建 Sable **Fixed Constraint**，将两艘船物理锁定。
 - 任意一端断开红石即可解除物理锁；右键可查看当前状态（未启动、已启动、吸附中、已锁定）。
-- 接口碰撞形状始终为空，空心中心和锁定后的通道均允许玩家穿过；接口不会把船块合并成同一个子层。
+- 碰撞形状始终为空，空心中心和锁定后的通道均允许玩家穿过；接口不会把船块合并成同一个子层。
 - 支持上、下、东、西、南、北六向放置；对接方向以接口的 `facing` 面为准。
+
+### 太空维度
+
+- 只有驾驶员处于 Sable 飞船子层上时，飞船上升到主世界 **Y > 9999** 才会自动进入 `rocketengine:space`。不在飞船上的玩家不会被单独送入太空。
+- 飞船会连同 Dimensional Sable 能识别的连接子层一起迁移；若迁移失败，不会把驾驶员单独传走。
+- 太空维度使用空洞地形。玩家、其他实体和飞船均无重力；Sable 飞船的维度重力、空气阻力和气压也设为零。
+- 在太空维度驾驶飞船向下飞，驾驶员低于 **Y=0** 时整船及连接子层会一并迁回主世界。
+- **Dimensional Sable 1.0.5+ 是服务端必需依赖**。多人游戏中安装到服务端；单人游戏需将其安装在该游戏实例中。Dimensional Sable 自身的跨模组机械装置兼容范围请参照其说明。
 
 ## 配方与物品
 
@@ -50,10 +60,11 @@
 ./gradlew build
 ```
 
-成品位于 `build/libs/rocketengine-0.7.2.jar`。`.github/workflows/release.yml` 会在每次推送到 `main` 后自动构建并发布 JAR。
+成品位于 `build/libs/rocketengine-0.8.0.jar`。`.github/workflows/release.yml` 会在每次推送到 `main` 后自动构建并发布 JAR。
 
 ## 上游参考
 
 - [Sable Modrinth 页面](https://modrinth.com/project/T9PomCSv)
+- [Dimensional Sable Modrinth 页面](https://modrinth.com/project/Iq9c4mLa)
 - [Sable 推力 actor 接口](https://github.com/ryanhcode/sable/blob/main/common/src/main/java/dev/ryanhcode/sable/api/block/propeller/BlockEntitySubLevelPropellerActor.java)
 - [NeoForge 流体能力说明](https://docs.neoforged.net/docs/1.21.1/datastorage/capabilities/)
