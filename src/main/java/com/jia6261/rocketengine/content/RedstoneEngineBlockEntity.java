@@ -147,7 +147,11 @@ public final class RedstoneEngineBlockEntity extends BlockEntity implements Bloc
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.put("LavaTank", lavaTank.getFluid().save(registries));
+        if (lavaTank.isEmpty()) {
+            tag.remove("LavaTank");
+        } else {
+            tag.put("LavaTank", lavaTank.getFluid().save(registries));
+        }
         tag.putDouble("FuelUseRemainder", fuelUseRemainder);
     }
 
