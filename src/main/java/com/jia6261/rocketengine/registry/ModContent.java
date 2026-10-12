@@ -58,7 +58,7 @@ public final class ModContent {
                     BlockEntityType.Builder.of(RcsThrusterBlockEntity::new, RCS_THRUSTER.get()).build(null));
 
     public static final DeferredBlock<SpecificImpulseDetectorBlock> SPECIFIC_IMPULSE_DETECTOR = BLOCKS.register("specific_impulse_detector", () ->
-            new SpecificImpulseDetectorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).strength(2.0F).noOcclusion()));
+            new SpecificImpulseDetectorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).strength(2.0F)));
     public static final DeferredItem<BlockItem> SPECIFIC_IMPULSE_DETECTOR_ITEM = ITEMS.register("specific_impulse_detector", () ->
             new BlockItem(SPECIFIC_IMPULSE_DETECTOR.get(), new Item.Properties()));
 

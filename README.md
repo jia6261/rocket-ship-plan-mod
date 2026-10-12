@@ -60,7 +60,7 @@
 ./gradlew build
 ```
 
-成品位于 `build/libs/rocketengine-0.8.1.jar`。`.github/workflows/release.yml` 会在每次推送到 `main` 后自动构建并发布 JAR。
+成品位于 `build/libs/rocketengine-0.8.2.jar`。`.github/workflows/release.yml` 会在每次推送到 `main` 后自动构建并发布 JAR。
 
 ## 上游参考
 
