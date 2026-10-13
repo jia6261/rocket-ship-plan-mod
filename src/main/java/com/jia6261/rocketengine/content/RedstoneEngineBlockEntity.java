@@ -53,6 +53,17 @@ public final class RedstoneEngineBlockEntity extends BlockEntity implements Bloc
         return MAX_AIRFLOW * getThrottle();
     }
 
+    /** Rocket exhaust thrust is independent of ambient pressure and relative airflow. */
+    @Override
+    public double getAirflowScaling() {
+        return 1.0;
+    }
+
+    @Override
+    public double getCurrentAirPressure() {
+        return 1.0;
+    }
+
     @Override
     public double getThrust() {
         // Sable applies -getThrust along FACING. FACING is the exhaust direction,

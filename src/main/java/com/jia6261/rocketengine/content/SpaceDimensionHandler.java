@@ -36,7 +36,7 @@ public final class SpaceDimensionHandler {
     private static final String ORIGINAL_NO_GRAVITY_TAG = "rocketengine_space_original_no_gravity";
     private static final Map<UUID, Integer> NOTICE_COOLDOWNS = new HashMap<>();
 
-    private static final double OVERWORLD_ENTRY_Y = 9999.0;
+    private static final double OVERWORLD_ENTRY_Y = 1000.0;
     private static final double SPACE_ENTRY_Y = 1024.0;
     private static final double SPACE_RETURN_Y = 0.0;
     private static final double OVERWORLD_RETURN_Y = 9488.0;

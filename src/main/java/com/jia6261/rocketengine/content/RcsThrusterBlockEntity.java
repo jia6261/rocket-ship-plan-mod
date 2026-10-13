@@ -39,6 +39,17 @@ public final class RcsThrusterBlockEntity extends BlockEntity implements BlockEn
         return MAX_AIRFLOW * getThrottle();
     }
 
+    /** Reaction-control thrust does not depend on ambient pressure or relative airflow. */
+    @Override
+    public double getAirflowScaling() {
+        return 1.0;
+    }
+
+    @Override
+    public double getCurrentAirPressure() {
+        return 1.0;
+    }
+
     @Override
     public double getThrust() {
         // Sable negates this value along FACING, so positive thrust produces
