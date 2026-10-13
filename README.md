@@ -42,7 +42,7 @@
 
 ### 太空维度
 
-- 只有驾驶员处于 Sable 飞船子层上时，飞船上升到主世界 **Y > 9999** 才会自动进入 `rocketengine:space`。不在飞船上的玩家不会被单独送入太空。
+- 驾驶员只要站在 Sable 飞船上（无需进入船体或乘坐载具），飞船上升到主世界 **Y > 9999** 即可自动进入 `rocketengine:space`。不在飞船上的玩家不会被单独送入太空。
 - 飞船会连同 Dimensional Sable 能识别的连接子层一起迁移；若迁移失败，不会把驾驶员单独传走。
 - 太空维度使用空洞地形。玩家、其他实体和飞船均无重力；Sable 飞船的维度重力、空气阻力和气压也设为零。
 - 在太空维度驾驶飞船向下飞，驾驶员低于 **Y=0** 时整船及连接子层会一并迁回主世界。
@@ -60,7 +60,7 @@
 ./gradlew build
 ```
 
-成品位于 `build/libs/rocketengine-0.8.2.jar`。`.github/workflows/release.yml` 会在每次推送到 `main` 后自动构建并发布 JAR。
+成品位于 `build/libs/rocketengine-0.8.3.jar`。`.github/workflows/release.yml` 会在每次推送到 `main` 后自动构建并发布 JAR。
 
 ## 上游参考
 

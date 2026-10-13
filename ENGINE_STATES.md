@@ -30,7 +30,7 @@
 ## 太空维度
 
 - 维度资源 ID 为 `rocketengine:space`，使用空洞地形和黑色天空。
-- 驾驶员在 Sable 子层飞船上时，主世界 **Y > 9999** 会触发跨界。系统调用 Dimensional Sable 的 `WarpSubLevel` 公共接口迁移该船和所有连接子层；飞船迁移失败时不会只传送驾驶员。
+- 驾驶员站在 Sable 子层飞船上时，主世界 **Y > 9999** 会触发跨界；不要求进入船体或乘坐载具。系统调用 Dimensional Sable 的 `WarpSubLevel` 公共接口迁移该船和所有连接子层；飞船迁移失败时不会只传送驾驶员。
 - 太空中玩家和普通实体设为无重力；`data/sable/dimension_physics/rocketengine_space.json` 将 Sable 飞船的重力、空气阻力和气压设为零。
 - 驾驶员在太空驾驶飞船向下飞到 **Y < 0** 时，整船与连接子层一起迁回主世界。
 - 服务端必须安装 **Dimensional Sable 1.0.5+**；Sable 子层默认 Y 移除上限为 100000，足以容纳 9999 的触发高度。若服务器管理员改低了 Sable 上限，需要将它调到高于 9999。

@@ -96,8 +96,9 @@ public final class SpaceDimensionHandler {
             return;
         }
 
-        var containing = Sable.HELPER.getContaining(player);
-        if (!(containing instanceof ServerSubLevel ship) || ship.isRemoved()) {
+        var trackedSubLevel = Sable.HELPER.getTrackingOrVehicleSubLevel(player);
+        if (!(trackedSubLevel instanceof ServerSubLevel ship) || ship.isRemoved()
+                || (enteringSpace && (!player.onGround() || Sable.HELPER.getTrackingSubLevel(player) != ship))) {
             tellRateLimited(player, "message.rocketengine.space.ship_required");
             return;
         }
